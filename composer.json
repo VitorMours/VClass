@@ -1,0 +1,22 @@
+{
+    "name": "anton/v-class",
+    "require": {
+        "phpunit/phpunit": "^13.2",
+        "robmorgan/phinx": "^0.16.11",
+        "picocss/pico": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/Core/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Joao Vitor",
+            "email": "jvrezendemoura@gmail.com"
+        }
+    ]
+}

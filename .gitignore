@@ -1,0 +1,37 @@
+# Dependencies
+/vendor/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Cache / runtime
+/cache/
+/tmp/
+/storage/
+/var/
+
+# Composer
+composer.phar
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PHPUnit / tooling
+.phpunit.result.cache
+.phpunit.cache
+.php-cs-fixer.cache
+
+# Uploaded/generated files
+/public/uploads/
+/public/storage/
