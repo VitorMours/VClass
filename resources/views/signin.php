@@ -11,7 +11,7 @@
 
           <form method="POST" class="p-4 border rounded bg-white shadow-sm">
             <h2 class="text-center mb-4">Sign in</h2>
-            <div class="d-flex">
+            <div class="d-flex gap-3">
               <div class="mb-3">
                 <label for="nameSigninInput" class="form-label">
                   Primeiro Nome
