@@ -1,34 +1,25 @@
 <?php
-// app/Core/Router.php
-
 namespace App\Core;
 
 class Router {
     private array $routes;
-    public function __construct()
-    {
+
+    public function __construct() {
         $this->routes = require base_path('routes/web.php');
     }
 
-    public function dispatch(string $method, string $uri): void
-    {
-        $routes = $this->routes[$method] ?? [];
-
-        foreach ($routes as $pattern => $action) {
-            $regex = preg_replace('/\{[a-z]+\}/', '([^/]+)', $pattern);
-            $regex = "#^{$regex}$#";
-
+    public function match(string $method, string $uri): ?array {
+        foreach ($this->routes[$method] ?? [] as $pattern => $config) {
+            $regex = "#^" . preg_replace('/\{[a-z]+\}/', '([^/]+)', $pattern) . "$#";
             if (preg_match($regex, $uri, $matches)) {
-                array_shift($matches); // remove o match completo
-
-                [$controllerClass, $method] = $action;
-                $controller = new $controllerClass();
-                call_user_func_array([$controller, $method], $matches);
-                return;
+                array_shift($matches);
+                return [
+                    'action' => $config['action'],
+                    'middlewares' => $config['middlewares'] ?? [],
+                    'params' => $matches
+                ];
             }
         }
-
-        http_response_code(404);
-        echo '404 - Página não encontrada';
+        return null;
     }
 }

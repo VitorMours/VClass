@@ -10,6 +10,7 @@
         <div class="col-11 col-sm-8 col-md-6 col-lg-4">
 
           <form method="POST" class="p-4 border rounded bg-white shadow-sm">
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'] ?? bin2hex(random_bytes(32)); ?>">
             <h2 class="text-center mb-4">Login</h2>
 
             <div class="mb-3">

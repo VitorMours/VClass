@@ -1,18 +1,34 @@
 <?php
 
-  use App\Controllers\UserController;
-  use App\Controllers\HomeController;
-  use App\Controllers\AuthController;
+use App\Controllers\UserController;
+use App\Controllers\HomeController;
+use App\Controllers\AuthController;
+use App\Middlewares\AuthMiddleware;
+use App\Middlewares\LoggerMiddleware;
 
-  return [
-    'GET' => [
-      '/' => [HomeController::class, 'index'],
-      '/login' => [AuthController::class, 'login'],
-      '/signin' => [AuthController::class, 'signin'],
-      '/users' => [UserController::class, 'index'],
+return [
+  'GET' => [
+    '/' => [
+        'action' => [HomeController::class, 'index'],
+        'middlewares' => []
     ],
-    'POST' => [
-      '/signin' => [AuthController::class, 'createUser']
+    '/login' => [
+        'action' => [AuthController::class, 'login'],
+        'middlewares' => []
+    ],
+    '/signin' => [
+        'action' => [AuthController::class, 'signin'],
+        'middlewares' => []
+    ],
+    '/users' => [
+        'action' => [UserController::class, 'index'],
+        'middlewares' => [LoggerMiddleware::class, AuthMiddleware::class] // Protegido!
+    ],
+  ],
+  'POST' => [
+    '/signin' => [
+        'action' => [AuthController::class, 'createUser'],
+        'middlewares' => [LoggerMiddleware::class]
     ]
-  ];
-  ?>
+  ]
+];
