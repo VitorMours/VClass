@@ -1,7 +1,9 @@
 <?php
-
+declare(strict_types=1);
 
 namespace App\Controllers;
+
+use App\Services\AuthService;
 
 
 class AuthController
@@ -36,10 +38,11 @@ class AuthController
       header('Location: /login');
       exit;
     }
+
+    $password = filter_input(INPUT_POST, 'password');
   }
 
-  public function createUser($data): void
+  public function createUser(): void
   {
-    view('signin', [$data]);
   }
 }

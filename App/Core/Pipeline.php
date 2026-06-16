@@ -19,8 +19,6 @@ class Pipeline {
             },
             $destination
         );
-
-        // Dispara a cadeia passando um request vazio
         return $pipeline([]);
     }
 }
