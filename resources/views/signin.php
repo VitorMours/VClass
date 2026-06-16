@@ -11,6 +11,30 @@
 
           <form method="POST" class="p-4 border rounded bg-white shadow-sm">
             <h2 class="text-center mb-4">Sign in</h2>
+            <div class="d-flex">
+              <div class="mb-3">
+                <label for="nameSigninInput" class="form-label">
+                  Primeiro Nome
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nameSigninInput"
+                  name="name"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label for="surnameSigninInput" class="form-label">
+                  Sobrenome
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="surnameSigninInput"
+                  name="surname"
+                  required>
+              </div>
+            </div>
 
             <div class="mb-3">
               <label for="emailLoginInput" class="form-label">
@@ -36,11 +60,23 @@
                 required>
             </div>
 
+            <div class="mb-3">
+              <label for="retypePasswordLoginInput" class="form-label">
+                Repita a Sua Senha
+              </label>
+              <input
+                type="password"
+                class="form-control"
+                id="retypePasswordLoginInput"
+                name="retypePassword"
+                required>
+            </div>
+
             <div class="d-flex justify-content-center mt-4">
               <button
                 type="submit"
                 class="btn btn-primary w-50">
-                Fazer login
+                Criar conta
               </button>
             </div>
           </form>

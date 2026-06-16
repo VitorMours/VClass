@@ -11,10 +11,8 @@
       '/signin' => [AuthController::class, 'signin'],
       '/users' => [UserController::class, 'index'],
     ],
-    'POST' => []
-
-
-
+    'POST' => [
+      '/signin' => [AuthController::class, 'createUser']
+    ]
   ];
-
   ?>

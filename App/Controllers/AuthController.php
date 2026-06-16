@@ -16,9 +16,10 @@ class AuthController {
     view('signin', []);
   }
 
-
   public function authenticateUser(): void {}  
 
-  public function createUser(): void {}  
+  public function createUser($data): void {
+    view('signin', [$data]);
+  }  
 }
 ?>
