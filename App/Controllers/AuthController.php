@@ -26,6 +26,7 @@ class AuthController
     if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
       die('Tentativa de ataque detectada');
     }
+
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
     $errors = [];
@@ -33,6 +34,7 @@ class AuthController
       $errors['email'] = "E-mail inválido.";
     }
 
+    
     if (!empty($errors)) {
       $_SESSION['errors'] = $errors;
       header('Location: /login');
