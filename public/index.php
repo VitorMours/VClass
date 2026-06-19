@@ -3,7 +3,10 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Core\Kernel;
+use App\Core\EloquentBootstrap;
 
+
+EloquentBootstrap::init();
 session_start();
 
 try {

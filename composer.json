@@ -4,7 +4,9 @@
         "phpunit/phpunit": "^13.2",
         "robmorgan/phinx": "^0.16.11",
         "picocss/pico": "^2.1",
-        "monolog/monolog": "^3.10"
+        "monolog/monolog": "^3.10",
+        "illuminate/database": "^13.16",
+        "illuminate/events": "^13.16"
     },
     "autoload": {
         "psr-4": {
@@ -13,6 +15,14 @@
         "files": [
             "App/Core/helpers.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "Tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "authors": [
         {

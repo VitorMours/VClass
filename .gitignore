@@ -17,6 +17,9 @@
 
 # Composer
 composer.phar
+.db/development.sqlite
+db/development.sqlite
+
 
 # IDEs
 .idea/
