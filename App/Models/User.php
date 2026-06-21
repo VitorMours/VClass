@@ -1,27 +1,26 @@
 <?php
+declare(strict_types=1);
 
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
 
-/**
- * @author Joao Vitor Rezende Moura
- * Class to be NOT implemented, only an abstract class to determine the behaviour 
- * of the students and the teatchers inside the class. 
- */
-class User {
+class User extends Model{
 
+  protected $fillable = ['firstName', 'lastName', 'email', 'password'];
+  protected $hidden = ['password'];
+  protected $guarded = ['id', 'created_at', 'updated_at', 'is_admin'];
 
-  /**
-   * @author Joao Vitor Rezende Moura
-   * class constructor to create the user entity
-   * @param firstName : The parameter to determine the user first name
-   * @param lastName : The parameter to determine the user last name
-   * @param password : The parameter to determine the user password
-   * 
-   * @return User
-   */
-  public function __construct(private string $firstName, private ?string $lastName, private string $password){}
-
-  public function getFirstName() {}
-
-
-
+  public function setPasswordAttribute($value)
+  {
+    $this->attributes['password'] = password_hash($value, PASSWORD_BCRYPT);
   }
+
+  protected static function booted()
+  {
+    static::creating(function ($user) {
+      if (empty($user->status)) {
+        $user->status = 'ativo';
+      }
+    });
+  }
+}

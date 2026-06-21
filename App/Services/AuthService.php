@@ -8,7 +8,7 @@ class AuthService {
     public function __construct(){}
 
 
-    public function authenticateCredentials(){}
+    public function authenticateWithCredentials(){}
  
 }
 
