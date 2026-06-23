@@ -31,5 +31,19 @@ class TestCase extends BaseTestCase
                 $table->timestamps();
             });
         }
+        
+        if (!$schema->hasTable('professors')) {
+            $schema->create('professors', function ($table) {
+                $table->increments('id');
+                $table->string('firstName');
+                $table->string('lastName');
+                $table->string('email');
+                $table->string('password');
+                $table->string('specialization');
+                $table->float('value');
+                $table->string('status')->default('ativo');
+                $table->timestamps();
+            });
+        }
     }
 }

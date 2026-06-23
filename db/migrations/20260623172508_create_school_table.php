@@ -25,7 +25,7 @@ final class CreateSchoolTable extends AbstractMigration
             ->addColumn("name", "string")
             ->addColumn("cnpj", "string")
             ->addTimestamps()
-            ->addIndex(["cnpj"], ['unique'=>true])
+            ->addIndex(["cnpj"], ['unique' => true])
             ->create();
     }
 }
