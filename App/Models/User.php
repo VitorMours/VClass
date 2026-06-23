@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model{
 
-  protected $fillable = ['firstName', 'lastName', 'email', 'password'];
+  protected $fillable = ['firstName', 'lastName', 'email', 'password', 'status'];
   protected $hidden = ['password'];
-  protected $guarded = ['id', 'created_at', 'updated_at', 'is_admin'];
 
-  public function setPasswordAttribute($value)
+  public function setPasswordAttribute(string $value)
   {
     $this->attributes['password'] = password_hash($value, PASSWORD_BCRYPT);
   }

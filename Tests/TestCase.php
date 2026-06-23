@@ -6,8 +6,10 @@ use App\Core\EloquentBootstrap;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
-class TestCase extends BaseTestCase {
-    protected function setUp(): void {
+class TestCase extends BaseTestCase
+{
+    protected function setUp(): void
+    {
         parent::setUp();
         // Inicializa o Eloquent em Memória
         EloquentBootstrap::init(true);
@@ -15,7 +17,8 @@ class TestCase extends BaseTestCase {
         $this->migrate();
     }
 
-    protected function migrate() {
+    protected function migrate()
+    {
         $schema = Capsule::schema();
         if (!$schema->hasTable('users')) {
             $schema->create('users', function ($table) {
@@ -24,6 +27,7 @@ class TestCase extends BaseTestCase {
                 $table->string('lastName');
                 $table->string('email');
                 $table->string('password');
+                $table->string('status')->default('ativo'); // ADICIONE ESTA LINHA
                 $table->timestamps();
             });
         }
