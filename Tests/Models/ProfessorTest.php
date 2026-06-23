@@ -24,6 +24,7 @@ class ProfessorTest extends TestCase
             "specialization" => "Geography",
             "value" => "12",
         ];
+        
     }
 
     public function test_se_consegue_criar_o_professor(): void
@@ -54,7 +55,12 @@ class ProfessorTest extends TestCase
         $professor->refresh();
         $this->assertEquals("Maria", $professor->firstName);
         $this->assertEquals("Luiza", $professor->lastName);
-        $this->assertEquals("maria.mota@gmail.com", $professor->email);
-        // TODO: Falta atualizar os dados do usuario para testar    
+        $professor->update([
+            "firstName" => "Lucas",
+            "lastName" => "Damasceno",
+        ]);
+        $professor = Professor::find(1);
+        $this->assertEquals("Lucas", $professor->firstName);
+        $this->assertEquals("Damasceno", $professor->lastName);
     }
 }
