@@ -6,6 +6,7 @@ namespace Tests\Models;
 
 use Tests\TestCase;
 use App\Models\User;
+use App\Enums\UserStatus;
 
 class UserTest extends TestCase
 {
@@ -86,6 +87,11 @@ class UserTest extends TestCase
         $user->refresh();
         $this->assertNotNull($user->id, "Id nao esta sendo gerado pelo banco");
         $this->assertNotNull($user->status, "Status esta nulo");
-
     } 
+    public function test_status_padrao_seria_ativo() : void 
+    {
+        $user = User::create($this->dados);
+            $user->refresh();
+        $this->assertEquals(UserStatus::ATIVO, $user->status);
+    }
 }
