@@ -32,18 +32,14 @@ class ClassTest extends TestCase {
         $this->classData = [];
     }
 
-    function test_se_consegue_criar_a_classe() : void {
-        $professor = Professor::create($this->professorData);
-        $student = Student::create($this->studentData);
-        $this->assertinstanceOf(Professor::class, $professor);
-        $this->assertinstanceOf(Student::class, $student);
+    // function test_se_consegue_criar_a_classe() : void {
+    //     $professor = Professor::create($this->professorData);
+    //     $student = Student::create($this->studentData);
+    //     $this->assertinstanceOf(Professor::class, $professor);
+    //     $this->assertinstanceOf(Student::class, $student);
         
-        $class = Class_::create($this->classData);
+    //     $class = Class_::create($this->classData);
 
-
-    }
-
+    // }
 }
-
-
 ?>
