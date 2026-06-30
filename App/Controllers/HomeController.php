@@ -1,13 +1,13 @@
-<?php
+  <?php
 
-namespace App\Controllers; 
+  namespace App\Controllers; 
 
-class HomeController {
+  class HomeController {
 
-  public function __construct(){}
+    public function __construct(){}
 
-  public function index(): void{
-    view('index', []);
+    public function index(): void{
+      view('index', []);
+    }
   }
-}
-?>
+  ?>
