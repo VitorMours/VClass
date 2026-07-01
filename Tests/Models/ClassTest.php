@@ -15,6 +15,7 @@ class ClassTest extends TestCase {
     protected $professorData;
 
     function setUp() : void {
+        parent::setUp();    
         $this->professorData = [
             "firstName" => "Maria",
             "lastName" => "Luiza",
@@ -29,17 +30,28 @@ class ClassTest extends TestCase {
             "email" => "joao.silva@gmail.com",
             "password" => "password123!",
         ];
-        $this->classData = [];
+        $this->classData = [
+            "name" => "Data Structures",
+            "start_time" => "08:00:00",
+            "end_time" => "08:30:00",
+            "code" => "DSA101",
+        ];
     }
 
-    // function test_se_consegue_criar_a_classe() : void {
-    //     $professor = Professor::create($this->professorData);
-    //     $student = Student::create($this->studentData);
-    //     $this->assertinstanceOf(Professor::class, $professor);
-    //     $this->assertinstanceOf(Student::class, $student);
-        
-    //     $class = Class_::create($this->classData);
+    public function test_consegue_criar_uma_turma(): void {
+        $professor = Professor::create($this->professorData);    
+        $class = Class_::create([...$this->classData, "professor_id" => $professor->id]);
+        $created_class = Class_::find(1);
+        $this->assertEquals("1", $created_class->professor_id);
+    }
 
-    // }
+    public function test_consegue_adicionar_um_aluno_na_turma(): void {
+        $professor = Professor::create($this->professorData);
+        $class = Class_::create([...$this->classData, "professor_id" => $professor->id]);
+        $student = Student::create($this->studentData);
+        $this->assertEquals(0, $class->students()->count());
+        $class->students()->attach($student->id);
+        $this->assertEquals(1, $class->students()->count());
+    }
+
 }
-?>

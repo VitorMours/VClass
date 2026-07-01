@@ -12,7 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Class_ extends Model
 {
-    protected $fillable = ["name", "start_time", "end_time", "code"];
+    protected $table = "class_";
+    protected $fillable = ["name", "start_time", "end_time", "code", "professor_id"];
 
     public function professor(): BelongsTo
     {
@@ -22,5 +23,13 @@ class Class_ extends Model
     public function students(): BelongsToMany
     {
         return $this->belongsToMany(Student::class, 'class_student', 'class_id', 'student_id');
+    }
+
+    public function casts(): array
+    {
+        return [
+            'start_time' => 'datetime:H:i',
+            'end_time' => 'datetime:H:i',
+        ];
     }
 }

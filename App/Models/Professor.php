@@ -7,6 +7,7 @@ use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Professor extends User {
+    
 
     public function getFillable() : array {
         return array_merge(parent::getFillable(), ['specialization', 'value']);

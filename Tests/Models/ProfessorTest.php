@@ -63,4 +63,12 @@ class ProfessorTest extends TestCase
         $this->assertEquals("Lucas", $professor->firstName);
         $this->assertEquals("Damasceno", $professor->lastName);
     }
+
+    public function test_se_consegue_deletar_o_professor(): void {
+        $professor = Professor::create($this->data);
+        $this->assertEquals("maria.mota@gmail.com", $professor->email); 
+        $professor->delete();
+        $professor = Professor::find(1);
+        $this->assertNull($professor);
+    }
 }

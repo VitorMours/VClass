@@ -19,7 +19,7 @@ final class CreateClassTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table("classes");
+        $table = $this->table("class_");
         $table->addTimestamps()
             ->addColumn("name", "string")
             ->addColumn("code", "string")
