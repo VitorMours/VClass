@@ -1,11 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models;
+
 use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Model;
-
-
 
 /**
  * Modelo da entidade de User, sendo a classe base para as demais entidades 
@@ -18,10 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $password Senha de acesso do usuario ao sistema
  * @property UserStatus $status Status do usuario, podendo ser ativo, desativo ou suspenso 
  */
-
-
-class User extends Model {
-
+class User extends Model
+{
 
   /**
    * Campos do respectivo modelo, os quais possuem comportamentos distintos 
@@ -29,9 +27,6 @@ class User extends Model {
    * @property array $fillable Que podem ser preenchidos em massa, como pelo metodo create() do Eloquent
    * @property array $hidden Que nao devem ser expostos em respostas de API
    * @property array $casts Que devem ser convertidos para tipos específicos durante a criacao, atualizacao, leitura e serializacao do modelo
-   * 
-   * 
-   * 
    */
   protected $fillable = ['firstName', 'lastName', 'email', 'password', 'status'];
   protected $hidden = ['password'];
@@ -41,6 +36,13 @@ class User extends Model {
   public function setPasswordAttribute(string $value)
   {
     $this->attributes['password'] = password_hash($value, PASSWORD_BCRYPT);
+  }
+
+  public function getCasts()
+  {
+    return array_merge(parent::getCasts(), [
+      'status' => UserStatus::class,
+    ]);
   }
 
   protected static function booted()

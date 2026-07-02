@@ -54,6 +54,7 @@ class TestCase extends BaseTestCase
                 $table->string('password');
                 $table->string('registration_number')->nullable();
                 $table->string('grade')->nullable();
+                $table->string('status')->default('ativo');
                 $table->timestamp('enrolled_at')->nullable();
                 $table->timestamps();
             });
@@ -78,6 +79,16 @@ class TestCase extends BaseTestCase
                 $table->foreign('class_id')->references('id')->on('class_')->onDelete('cascade');
                 $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
                 $table->primary(['class_id', 'student_id']);
+            });
+        }
+        if (!$schema->hasTable('schools')) {
+            $schema->create('schools', function ($table) {
+                $table->increments('id');
+                $table->string('owner');
+                $table->string('location');
+                $table->string('name');
+                $table->string('cnpj');
+                $table->timestamps();
             });
         }
     }

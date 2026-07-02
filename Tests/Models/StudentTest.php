@@ -6,6 +6,7 @@ namespace Test\Models;
 
 use App\Models\Student;
 use App\Models\User;
+use App\Enums\UserStatus;
 use Tests\TestCase;
 
 
@@ -62,10 +63,30 @@ class StudentTest extends TestCase
     $deleted_student = Student::find(1);
     $this->assertNull($deleted_student);
   }
+
   function test_consegue_atribuir_valores_de_registro_e_grade() : void {
     $student = Student::create($this->studentData);
-    $student->update(["registration_number" => "", "grade" => "B" ]);
-
-
+    $student->update(["registration_number" => "123asd", "grade" => "23" ]);
+    $this->assertEquals("123asd", $student->registration_number);
+    $this->assertIsInt($student->grade);
+    $this->assertEquals(23, $student->grade);
   }
+
+  function test_consegue_atribuir_valor_de_data_de_matricula() : void {
+    $student = Student::create($this->studentData);
+    $student->update(['enrolled_at' => '2023-01-01 00:00:00']);
+    $student->refresh();
+    $this->assertInstanceOf(\DateTimeInterface::class, $student->enrolled_at);
+  }
+
+  function test_consegue_atribuir_valor_de_status() : void {
+    $student = Student::create($this->studentData);
+    $student->refresh();
+    $this->assertInstanceOf(UserStatus::class, $student->status);
+    $this->assertEquals(UserStatus::ATIVO, $student->status);
+    $student->update(["status" => UserStatus::SUSPENSO]);
+    $student->refresh();
+    $this->assertEquals(UserStatus::SUSPENSO, $student->status);
+  }
+
 }

@@ -6,10 +6,6 @@ use App\Repositories\AuthRepository;
 
 class AuthService {
     public function __construct(){}
-
-
     public function authenticateWithCredentials(){}
- 
 }
-
 ?>

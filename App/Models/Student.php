@@ -38,12 +38,21 @@ class Student extends User
      */
     public function getFillable()
     {
-        return array_merge(parent::getFillable(), ['registration_number', 'grade']);
+        return array_merge(parent::getFillable(), ['registration_number', 'grade', 'enrolled_at']);
     }
 
+
+    /**
+     * Retorna os campos que devem ser convertidos para tipos específicos durante a criacao, atualizacao, leitura e serializacao do modelo
+     * combina os campos herdados de @see User com os campos especificos, sendo eles
+     * 
+     * @property \DateTime $enrolled_at 
+     * @property int $grade 
+     * 
+     * @return array
+     */
     public function getCasts()
     {
-        return array_merge(parent::getCasts(), ['enrolled_at' => 'datetime']);
+        return array_merge(parent::getCasts(), ['enrolled_at' => 'datetime', 'grade' => 'int']);
     }
-    
 }
