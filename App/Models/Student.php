@@ -26,7 +26,6 @@ use App\Enums\StudentStatus;
  */
 class Student extends User
 {
-
     /**
      * Retorna os campos que podem ser preenchidos em massa
      * combina os campos herdados de @see User com os campos especificos, sendo eles

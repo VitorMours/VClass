@@ -6,6 +6,20 @@ use App\Models\User;
 use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+
+/**
+ * Modelo de entidade de Professor, esta vinculado diretamente a classe @see User
+ * 
+ * @property string $specialization Area de especializacao do professor
+ * @property float $value Valor cobrado pelo professor por hora de aula
+ * 
+ * as propriedades herdadas de @see User são:
+ * @property string $firstName
+ * @property string $lastName
+ * @property string $email
+ * @property string $password
+ * @property StudentStatus $status
+ */
 class Professor extends User {
     
 
