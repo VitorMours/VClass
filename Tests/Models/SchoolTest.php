@@ -44,4 +44,13 @@ class SchoolTest extends TestCase
         $school->delete();
         $this->assertNull(School::find($id));
     }
+
+    public function test_consegue_procurar_escola_pelo_id() : void 
+    {
+        $school = School::create($this->data);
+        $id = $school->id;
+        $this->assertNotNull(School::find($id));
+    }
+
+    
 }

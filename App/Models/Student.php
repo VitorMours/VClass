@@ -1,13 +1,10 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use App\Enums\StudentStatus;
-
 
 /**
  * Modelo da entidade de Student, esta vinculado diretamente a classse @see User
@@ -28,28 +25,30 @@ class Student extends User
 {
     /**
      * Retorna os campos que podem ser preenchidos em massa
-     * combina os campos herdados de @see User com os campos especificos, sendo eles
-     * 
+     * combina os campos herdados de @see User com os campos especificos, 
+     * sendo eles:
      * @property string $registration_number 
      * @property int $grade 
      * 
      * @return array
      */
+    #[\Override]
     public function getFillable()
     {
         return array_merge(parent::getFillable(), ['registration_number', 'grade', 'enrolled_at']);
     }
 
-
     /**
-     * Retorna os campos que devem ser convertidos para tipos específicos durante a criacao, atualizacao, leitura e serializacao do modelo
-     * combina os campos herdados de @see User com os campos especificos, sendo eles
-     * 
+     * Retorna os campos que devem ser convertidos para tipos específicos 
+     * durante a criacao, atualizacao, leitura e serializacao do modelo
+     * combina os campos herdados de @see User com os campos especificos, 
+     * sendo eles:
      * @property \DateTime $enrolled_at 
      * @property int $grade 
      * 
      * @return array
      */
+    #[\Override]
     public function getCasts()
     {
         return array_merge(parent::getCasts(), ['enrolled_at' => 'datetime', 'grade' => 'int']);

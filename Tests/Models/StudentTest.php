@@ -14,6 +14,7 @@ class StudentTest extends TestCase
 {
 
   protected $studentData;
+  protected $studentCompleteData;
 
   function setUp(): void
   {
@@ -24,6 +25,16 @@ class StudentTest extends TestCase
       "email" => "joao.silva@gmail.com",
       "password" => "password123!",
     ];
+    $this->studentCompleteData = [
+      "firstName" => "Joao",
+      "lastName" => "Silva",
+      "email" => "joao.silva@gmail.com",
+      "password" => "password123!",
+      "registration_number" => "123sda2",
+      "grade" => "10",
+      "enrolled_at' => '2023-01-01 00:00:00"
+    ];
+
   }
 
   function test_consegue_criar_um_aluno(): void {
@@ -89,4 +100,12 @@ class StudentTest extends TestCase
     $this->assertEquals(UserStatus::SUSPENSO, $student->status);
   }
 
+  function test_se_consegue_criar_usuario_com_todos_os_dados_ao_mesmo_tempo(): void 
+  {
+    $student = Student::create($this->studentCompleteData);
+    $student->refresh();
+    $this->assertEquals(UserStatus::ATIVO, $student->status);
+    $this->assertInstanceOf(UserStatus::class, $student->status);
+    $this->assertEquals("Joao", $student->firstName);
+  }
 }

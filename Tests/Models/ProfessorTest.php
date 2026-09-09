@@ -71,4 +71,12 @@ class ProfessorTest extends TestCase
         $professor = Professor::find(1);
         $this->assertNull($professor);
     }
+
+    public function test_consegue_buscar_o_professor_pelo_id() : void 
+    {
+        $professor = Professor::create($this->data);
+        $professor->refresh();
+        $this->assertEquals("maria.mota@gmail.com", $professor->email); 
+        $this->assertNotNull(Professor::find(1));
+    }
 }

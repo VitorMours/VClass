@@ -91,7 +91,17 @@ class UserTest extends TestCase
     public function test_status_padrao_seria_ativo() : void 
     {
         $user = User::create($this->dados);
-            $user->refresh();
+        $user->refresh();
         $this->assertEquals(UserStatus::ATIVO, $user->status);
+    }
+
+    public function test_status_pode_ser_modificado() : void 
+    {
+        $user = User::create($this->dados);
+        $user->refresh();
+        $this->assertEquals(UserStatus::ATIVO, $user->status);
+        $user->update(["status" => UserStatus::SUSPENSO]);
+        $user->refresh();
+        $this->assertEquals(UserStatus::SUSPENSO, $user->status);
     }
 }

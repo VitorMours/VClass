@@ -20,7 +20,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class User extends Model
 {
-
   /**
    * Campos do respectivo modelo, os quais possuem comportamentos distintos 
    * a depender do array o qual eles se encontram, sendo eles:  
@@ -38,6 +37,12 @@ class User extends Model
     $this->attributes['password'] = password_hash($value, PASSWORD_BCRYPT);
   }
 
+
+  /**
+   * Campos que devem ser convertidos para tipos específicos durante a definição
+   * da entidade dentro do sistema
+   */
+  #[\Override]
   public function getCasts()
   {
     return array_merge(parent::getCasts(), [
@@ -45,6 +50,13 @@ class User extends Model
     ]);
   }
 
+  /** 
+   * Ações que devem ser tomadas posteriormente à criação do usuário dentro 
+   * da base de dados do nosso sistema.
+   * @property UserStatus $status Definição do usuário como ativo, para poder 
+   * utilizar do sistema 
+   */
+  #[\Override]
   protected static function booted()
   {
     static::creating(function ($user) {

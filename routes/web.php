@@ -22,7 +22,7 @@ return [
     ],
     '/users' => [
         'action' => [UserController::class, 'index'],
-        'middlewares' => [LoggerMiddleware::class, AuthMiddleware::class] // Protegido!
+        'middlewares' => [LoggerMiddleware::class, AuthMiddleware::class] // Protegido
     ],
   ],
   'POST' => [
