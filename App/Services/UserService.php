@@ -5,12 +5,13 @@ namespace App\Services;
 use App\Services\PasswordHasher;
 use App\Models\User;
 
-
 class UserService {
     public function __construct(private readonly PasswordHasher $passwordHasher) {}
 
-
-    public function createUser(): void {}
+    public function createUser(array $userData): User
+    {
+        return User::create($userData);
+    }
     public function updateUser(): void {}
     public function findUser(): void {}
     public function deleteUser(): void {}
