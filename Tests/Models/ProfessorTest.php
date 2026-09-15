@@ -80,3 +80,4 @@ class ProfessorTest extends TestCase
         $this->assertNotNull(Professor::find(1));
     }
 }
+    
