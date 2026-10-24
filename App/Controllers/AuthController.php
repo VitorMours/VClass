@@ -25,7 +25,7 @@ class AuthController
     $errors = [];
 
     if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-      die('Tentativa de ataque detectada');
+      die('O seu token de cross-origin apresenta inconsistencia');
     }
 
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -45,7 +45,7 @@ class AuthController
     }
 
     try{
-      
+      // Tecnicamente deve ir dentro do servico de autenticacao, e a partir dele, verificar se o usuario existe
     }catch(\Exception $e){
 
     }

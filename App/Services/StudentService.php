@@ -1,6 +1,13 @@
 <?php 
 declare(strict_types=1);
 
-class StudentService {}
+namespace App\Services;
+
+class StudentService {
+
+
+    public function createStudent() {}
+
+}
 
 ?>
