@@ -30,7 +30,7 @@ class AuthService {
      *  @param string   password Senha do usuario que esta sendo autenticado
      *  @return bool result Retorna se o usuario foi autenticado com sucesso, ou sem sucesso
      */
-    public function authenticateWithCredentials(string $email, string $password) : bool {
+    public function authenticateWithCredentials(string $email, string $password) :  void {
 
 
 
