@@ -5,9 +5,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Core\Kernel;
 use App\Core\EloquentBootstrap;
 
-
-EloquentBootstrap::init();
 session_start();
+EloquentBootstrap::init();
 
 try {
     $kernel = new Kernel();

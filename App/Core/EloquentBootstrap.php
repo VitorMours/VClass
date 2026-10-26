@@ -18,8 +18,9 @@ class EloquentBootstrap
         'prefix'   => '',
       ]);
     } else {
-      // Configuração padrão para produção/desenvolvimento
-      $config = parse_ini_file("config.ini", true);
+      $configPath = dirname(__DIR__, 2) . '/config.ini';
+      $config = parse_ini_file($configPath, true);
+
       $dbPath = $config["database"]["database_path"];
 
       $capsule->addConnection([

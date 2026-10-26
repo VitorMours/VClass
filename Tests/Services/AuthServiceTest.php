@@ -38,6 +38,7 @@ class AuthServiceTest extends TestCase {
         $password = 'senha-teste123';
         $hashedPassword = $this->authService->securePassword($password);
         $this->assertNotSame($password, $hashedPassword);
+        
 
     }
 }

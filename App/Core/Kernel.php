@@ -1,12 +1,15 @@
 <?php 
 namespace App\Core;
 
+use App\Controllers\AuthController;
+use App\Services\AuthService;
+use App\Services\PasswordHasher;
+use App\Services\UserService;
+
 class Kernel {
     public function handle(string $method, string $uri) {
         $router = new Router();
         
-        // O router precisa ser ajustado para retornar não apenas a action, 
-        // mas também os middlewares associados àquela rota.
         $route = $router->match($method, $uri);
 
         if (!$route) {
@@ -14,15 +17,26 @@ class Kernel {
             return "404 - Página não encontrada";
         }
 
-        // Definimos o que acontece no "centro da cebola": a execução do controller
         $destination = function() use ($route) {
             [$controllerClass, $method] = $route['action'];
-            $controller = new $controllerClass();
+            $controller = match ($controllerClass) {
+                AuthController::class => $this->createAuthController(),
+                default => new $controllerClass(),
+            };
             return call_user_func_array([$controller, $method], $route['params']);
         };
 
         // Executamos o pipeline passando os middlewares da rota
         return Pipeline::run($route['middlewares'] ?? [], $destination);
+    }
+    
+    private function createAuthController(): AuthController
+    {
+        $passwordHasher = new PasswordHasher();
+        $authService = new AuthService($passwordHasher);
+        $userService = new UserService($authService);
+
+        return new AuthController($authService, $userService);
     }
 }
 ?>

@@ -3,26 +3,32 @@ declare(strict_types=1);
 
 namespace App\Services;
 use App\Models\User;
-use App\Services\AuthService;
 
 class UserService {
-    public function __construct() {}
+    public function __construct(private readonly AuthService $authService) {}
 
     public function createUser(array $userData): User
     {
         try {
-            $newPassword = AuthService::hashPassword($userData['password']);
+            $newPassword = $this->authService->securePassword($userData['password']);
             $userData = [...$userData, 'password' => $newPassword];        
-            return User::create($userData);
+            $user = User::create($userData);
+            printf("$user");
+            return $user;
         } catch(\Exception $e) {
             throw $e;
         }
     }
     
-    public function findUser(string $userID): ?User
+    public function findUserById(string $userID): ?User
     {
         return User::find($userID);
 
+    }
+
+    public function findUserByEmail(string $email)  
+    {
+        return User::where('email', $email)->first();
     }
 
     public function updateUser(): void {}

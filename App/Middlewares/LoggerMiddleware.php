@@ -2,7 +2,6 @@
 
 namespace App\Middlewares;
 
-use App\Middlewares\Base;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
