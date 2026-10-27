@@ -94,7 +94,6 @@ class AuthController
       $result = $this->userService->createUser($userData);// preencher com os dados de usuario
 
     }catch(\PDOException){
-
     }
 
   }

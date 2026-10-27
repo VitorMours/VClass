@@ -6,7 +6,8 @@
         "picocss/pico": "^2.1",
         "monolog/monolog": "^3.10",
         "illuminate/database": "^13.16",
-        "illuminate/events": "^13.16"
+        "illuminate/events": "^13.16",
+        "phpmailer/phpmailer": "^7.1"
     },
     "autoload": {
         "psr-4": {
