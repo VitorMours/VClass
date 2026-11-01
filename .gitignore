@@ -33,7 +33,6 @@
 
 # Front-end / bundles gerados
 **/dist/
-**/out/
 
 # Logs e arquivos temporários
 *.log
