@@ -1,41 +1,62 @@
-# Dependencies
-/vendor/
-
-# Environment files
+# Arquivos de ambiente e segredos (em qualquer subpasta)
 .env
 .env.*
 !.env.example
 
-# Logs
+# Dependências
+**/vendor/
+**/node_modules/
+
+# PHP / Composer
+**/composer.phar
+**/.phpunit.result.cache
+**/.phpunit.cache
+**/.php-cs-fixer.cache
+**/nbproject/private/
+
+# Dados locais e arquivos enviados
+**/storage/*
+!**/storage/.gitkeep
+**/cache/
+**/tmp/
+**/public/uploads/
+**/public/storage/
+**/*.sqlite
+**/*.sqlite3
+**/*.db
+
+# Java / Maven / Gradle
+**/target/
+**/build/
+**/.gradle/
+**/.mvn/wrapper/maven-wrapper.jar
+
+# Front-end / bundles gerados
+**/dist/
+**/out/
+
+# Logs e arquivos temporários
 *.log
-
-# Cache / runtime
-/cache/
-/tmp/
-/storage/
-/var/
-
-# Composer
-composer.phar
-.db/development.sqlite
-db/development.sqlite
-
+*.tmp
+*.swp
 
 # IDEs
 .idea/
 .vscode/
+**/.idea/
+**/.vscode/
 *.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.factorypath
+.springBeans
+.sts-cache/
+.sts4-cache/
+.apt_generated/
 
-# OS files
+# Sistema operacional
 .DS_Store
 Thumbs.db
-
-# PHPUnit / tooling
-.phpunit.result.cache
-.phpunit.cache
-.php-cs-fixer.cache
-
-# Uploaded/generated files
-/public/uploads/
-/public/storage/
-/nbproject/private/
