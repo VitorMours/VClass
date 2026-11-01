@@ -18,6 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/v1/qrcodes")
+@CrossOrigin(origins = "*")
 @Tag(name = "QR Code", description = "Endpoints para geração de QR Codes")
 public class QRCodeController {
 
