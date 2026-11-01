@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Services;
-
+use App\Models\User;
 
 /**
  * Servico de Autenticacao e Autorizacao
@@ -16,6 +16,7 @@ class AuthService {
 
     public function __construct(
         private readonly PasswordHasher $passwordHasher,
+        private readonly UserService $userService
         ){}
     
     public function securePassword(string $password) : string {
@@ -28,9 +29,13 @@ class AuthService {
      *  @param string   password Senha do usuario que esta sendo autenticado
      *  @return bool result Retorna se o usuario foi autenticado com sucesso, ou sem sucesso
      */
-    public function authenticateWithCredentials(string $email, string $password) :  void {
-
+    public function authenticateWithCredentials(string $email, string $password) :  ?User {
+        $user = $this->userService->findUserByEmail($email);
+        
+        if(!$user || !password_verify($password, $user->password)){
+            return null;
+        }
+        return $user;
     }
-
 }
 ?>

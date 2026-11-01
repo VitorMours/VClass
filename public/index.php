@@ -5,15 +5,22 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Core\Kernel;
 use App\Core\EloquentBootstrap;
 
-session_start();
+$requestMethod = $_SERVER['REQUEST_METHOD'];
+$requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$sessionRequiredPaths = ['/login', '/signin', '/logout'];
+
+if (isset($_COOKIE[session_name()]) || in_array($requestPath, $sessionRequiredPaths, true)) {
+    session_start();
+}
+
 EloquentBootstrap::init();
 
 try {
     $kernel = new Kernel();
 
     $response = $kernel->handle(
-        $_SERVER["REQUEST_METHOD"], 
-        parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
+        $requestMethod,
+        $requestPath
     );
 
     echo $response;

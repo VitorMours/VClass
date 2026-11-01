@@ -7,6 +7,7 @@ use Tests\TestCase;
 use App\Services\AuthService;
 use App\Services\PasswordHasher;
 use App\Services\StudentService;
+use App\Services\UserService;
 use App\Services\ProfessorService;
 
 class AuthServiceTest extends TestCase {
@@ -15,7 +16,8 @@ class AuthServiceTest extends TestCase {
 
     function setUp(): void {
         parent::setUp();
-        $this->authService = new AuthService(new PasswordHasher(), new StudentService(), new ProfessorService());
+        $passwordHasher = new PasswordHasher();
+        $this->authService = new AuthService($passwordHasher, new UserService());
     }
 
     public function test_existe_methodo_secure_password() : void {
@@ -38,7 +40,42 @@ class AuthServiceTest extends TestCase {
         $password = 'senha-teste123';
         $hashedPassword = $this->authService->securePassword($password);
         $this->assertNotSame($password, $hashedPassword);
-        
+    }
+
+    public function test_authenticate_with_valid_credentials_returns_user(): void {
+        $password = 'senha-teste123';
+        $userService = new UserService();
+        $user = $userService->createUser([
+            'firstName' => 'Teste',
+            'lastName' => 'Homologacao',
+            'email' => 'auth.valid@example.com',
+            'password' => $password,
+        ]);
+
+        $authenticatedUser = $this->authService->authenticateWithCredentials(
+            'auth.valid@example.com',
+            $password
+        );
+
+        $this->assertNotNull($authenticatedUser);
+        $this->assertSame($user->getKey(), $authenticatedUser->getKey());
+    }
+
+    public function test_authenticate_with_invalid_password_returns_null(): void {
+        $userService = new UserService();
+        $userService->createUser([
+            'firstName' => 'Teste',
+            'lastName' => 'Homologacao',
+            'email' => 'auth.invalid@example.com',
+            'password' => 'senha-correta123',
+        ]);
+
+        $authenticatedUser = $this->authService->authenticateWithCredentials(
+            'auth.invalid@example.com',
+            'senha-incorreta123'
+        );
+
+        $this->assertNull($authenticatedUser);
 
     }
 }

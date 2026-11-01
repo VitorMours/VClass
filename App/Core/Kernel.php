@@ -33,8 +33,8 @@ class Kernel {
     private function createAuthController(): AuthController
     {
         $passwordHasher = new PasswordHasher();
-        $authService = new AuthService($passwordHasher);
-        $userService = new UserService($authService);
+        $userService = new UserService();
+        $authService = new AuthService($passwordHasher, $userService);
 
         return new AuthController($authService, $userService);
     }

@@ -7,9 +7,12 @@
 
 
       <ul class="navbar-nav d-flex flex-row gap-3 mb-0">
-        <?php if (isset($_SESSION["user_id"])): ?>
+        <?php if (isset($_SESSION['user_id'])): ?>
           <li class="nav-item">
-            <a href="/logout" class="nav-link">Log out</a>
+            <form method="POST" action="/logout" class="m-0">
+              <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+              <button type="submit" class="nav-link btn btn-link p-0">Log out</button>
+            </form>
           </li>
         <?php else: ?>
           <li class="nav-item">

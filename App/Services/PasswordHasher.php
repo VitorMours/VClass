@@ -9,7 +9,6 @@ class PasswordHasher {
     }
 
 
-    public function verify_password(string $hashed_password): void {}
 }
 
 ?>

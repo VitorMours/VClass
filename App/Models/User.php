@@ -32,11 +32,10 @@ class User extends Model
 
   protected $casts = ["status" => UserStatus::class];
 
-  public function setPasswordAttribute(string $value)
+  public function setPasswordAttribute(string $value): void
   {
     $this->attributes['password'] = password_hash($value, PASSWORD_BCRYPT);
   }
-
 
   /**
    * Campos que devem ser convertidos para tipos específicos durante a definição

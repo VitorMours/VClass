@@ -5,19 +5,9 @@ namespace App\Services;
 use App\Models\User;
 
 class UserService {
-    public function __construct(private readonly AuthService $authService) {}
-
     public function createUser(array $userData): User
     {
-        try {
-            $newPassword = $this->authService->securePassword($userData['password']);
-            $userData = [...$userData, 'password' => $newPassword];        
-            $user = User::create($userData);
-            printf("$user");
-            return $user;
-        } catch(\Exception $e) {
-            throw $e;
-        }
+        return User::create($userData);
     }
     
     public function findUserById(string $userID): ?User

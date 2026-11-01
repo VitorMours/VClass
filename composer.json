@@ -30,5 +30,8 @@
             "name": "Joao Vitor",
             "email": "jvrezendemoura@gmail.com"
         }
-    ]
+    ],
+    "require-dev": {
+        "phpstan/phpstan": "^2.3"
+    }
 }
