@@ -1,7 +1,14 @@
 .sidebar-link {
     transition: background-color 0.3s ease-in-out; /* Transição suave */
 }
-.sidebar-link:hover {
+.sidebar-link:hover{
     background-color:white;
+}
 
+.active-tab {
+    background-color:white;
+}
+
+.active-tab > a {
+    color:black;
 }

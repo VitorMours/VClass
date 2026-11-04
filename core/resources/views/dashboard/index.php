@@ -9,8 +9,7 @@
 
         <main class="flex-grow-1 p-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="h3 mb-0 text-dark fw-bold">Bem-vindo, professor!</h1>
-                <!-- Adicionado data-bs-toggle e data-bs-target para acionar o modal -->
+                <h1 class="h3 mb-0 text-dark fw-bold">Bem-vindo, <?=  isset($user) ? $user->firstName: 'professor(a)' ?>!</h1>
                 <button class="btn btn-primary d-flex align-items-center gap-2 px-3 py-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#qrCodeModal">
                     <span class="material-icons fs-5">qr_code</span>
                     <span>Gerar QR Code</span>

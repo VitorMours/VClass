@@ -28,6 +28,10 @@ return [
     '/dashboard' => [
         'action' => [DashboardController::class, 'index'],
         'middlewares' => [LoggerMiddleware::class, AuthMiddleware::class]
+    ],
+    '/alunos' => [
+        'action' => [DashboardController::class, 'alunos'],
+        'middlewares' => [LoggerMiddleware::class, AuthMiddleware::class]
     ]
   ],
   'POST' => [

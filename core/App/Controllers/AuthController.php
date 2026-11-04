@@ -75,7 +75,8 @@ class AuthController
     session_regenerate_id(true);
     $_SESSION['user_id'] = $user->getKey();
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    header('Location: /dashboard');
+    $user = $this->userService->findUserById((string) $user->getKey());
+    view('dashboard/index', ['user' => $user]);
     exit;
   }
 
